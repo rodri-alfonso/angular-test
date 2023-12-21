@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
-const webpush = require('web-push');
+import webpush from 'web-push';
 
 @Component({
   selector: 'app-root',
