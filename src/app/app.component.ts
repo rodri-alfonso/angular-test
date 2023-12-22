@@ -16,7 +16,7 @@ export class AppComponent {
 
   readonly VAPID_PUBLIC_KEY =
     'BCHF3qSYrnH-981aad1iH10JHRqAkH47QHDsXXpbigV5zQjh5gHddh74jlg9tNwIiWTCfl50W6l_0sYmLnjykvA';
-  public tokenCompleted = '';
+  public tokenCompleted: any;
 
   constructor(private swPush: SwPush, private apiRest: ApiRestService) {
     this.subscribeToNotifications();
