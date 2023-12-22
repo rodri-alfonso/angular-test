@@ -38,13 +38,15 @@ export class AppComponent {
   }
 
   sendNotification() {
-    console.log(
-      '🚀 ~ file: app.component.ts:42 ~ this.tokenCompleted:',
-      this.tokenCompleted
-    );
-    this.saveToken(this.tokenCompleted).subscribe({
-      complete: () => console.log('Notification sent!'),
-    });
+    setTimeout(() => {
+      console.log(
+        '🚀 ~ file: app.component.ts:42 ~ this.tokenCompleted:',
+        this.tokenCompleted
+      );
+      this.saveToken(this.tokenCompleted).subscribe({
+        complete: () => console.log('Notification sent!'),
+      });
+    }, 2000);
   }
 
   saveToken(token: any) {
