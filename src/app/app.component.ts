@@ -27,9 +27,7 @@ export class AppComponent {
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
       .then((sub) => {
-        console.log('🚀 ~ file: app.component.ts:30 ~ sub:', sub);
-        const token = JSON.parse(JSON.stringify(sub));
-        console.log('Subscription successful', token);
+        console.log('Subscription successful', JSON.parse(JSON.stringify(sub)));
         this.tokenCompleted = JSON.stringify(sub);
       })
       .catch((err) =>
