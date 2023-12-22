@@ -44,5 +44,13 @@ export class AppComponent {
       );
   }
 
-  sendNotification() {}
+  sendNotification() {
+    fetch('http://localhost:9000/api/enviar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    });
+  }
 }
