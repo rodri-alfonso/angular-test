@@ -38,6 +38,12 @@ export class AppComponent {
   }
 
   sendNotification() {
-    console.log('se envio!');
+    fetch('/api/enviar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    }).then(() => console.log('se envio!'));
   }
 }
