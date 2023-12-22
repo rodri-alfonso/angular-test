@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
+import { ApiRestService } from './api-rest.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
     'BCHF3qSYrnH-981aad1iH10JHRqAkH47QHDsXXpbigV5zQjh5gHddh74jlg9tNwIiWTCfl50W6l_0sYmLnjykvA';
   public tokenCompleted: any;
 
-  constructor(private swPush: SwPush) {
+  constructor(private swPush: SwPush, private apiService: ApiRestService) {
     this.subscribeToNotifications();
   }
 
@@ -36,12 +37,8 @@ export class AppComponent {
   }
 
   sendNotification() {
-    fetch('http://localhost:9000/api/enviar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: this.tokenCompleted,
-    });
+    this.apiService
+      .saveToken(this.tokenCompleted)
+      .subscribe({ complete: () => console.log('Notification sent!') });
   }
 }

@@ -5,12 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ApiRestService {
-  public url = 'http://localhost:55345';
+  public url = 'http://localhost:9000/api/enviar';
 
   constructor(private http: HttpClient) {}
 
   saveToken(token: any) {
-    return this.http.post(`${this.url}/save`, {
+    return this.http.post(`${this.url}`, {
       body: { token },
     });
   }
