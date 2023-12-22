@@ -16,6 +16,7 @@ export class AppComponent {
 
   readonly VAPID_PUBLIC_KEY =
     'BCHF3qSYrnH-981aad1iH10JHRqAkH47QHDsXXpbigV5zQjh5gHddh74jlg9tNwIiWTCfl50W6l_0sYmLnjykvA';
+  public tokenCompleted = '';
 
   constructor(private swPush: SwPush, private apiRest: ApiRestService) {
     this.subscribeToNotifications();
@@ -27,17 +28,7 @@ export class AppComponent {
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
       .then((sub) => {
-        console.log('🚀 ~ file: app.component.ts:30 ~ sub:', sub);
-        const token = JSON.parse(JSON.stringify(sub));
-
-        this.apiRest.saveToken(token).subscribe(
-          (res) => {
-            console.log('res', res);
-          },
-          (err) => {
-            console.log('err', err);
-          }
-        );
+        this.tokenCompleted = JSON.stringify(sub);
       })
       .catch((err) =>
         console.error('Could not subscribe to notifications', err)
@@ -50,7 +41,7 @@ export class AppComponent {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({}),
+      body: this.tokenCompleted,
     });
   }
 }
