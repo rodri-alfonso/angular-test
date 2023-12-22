@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular-test": "node dist/angular-test/server/server.mjs",
-    "start-pwa": "ng build && http-server -p 8080 -c-1 dist/angular-test"
+    "start-pwa": "ng build --configuration production --aot && http-server -p 8080 -c-1 dist/angular-test"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +26,6 @@
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "web-push": "^3.6.6",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
