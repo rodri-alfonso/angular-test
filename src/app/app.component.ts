@@ -30,18 +30,22 @@ export class AppComponent {
       .then((sub) => {
         const token = JSON.parse(JSON.stringify(sub));
         console.log('Subscription successful', token);
-        // this.tokenCompleted = JSON.stringify(sub);
-
-        this.saveToken(token).subscribe({
-          complete: () => console.log('Notification sent!'),
-        });
+        this.tokenCompleted = JSON.stringify(sub);
       })
       .catch((err) =>
         console.error('Could not subscribe to notifications', err)
       );
   }
 
-  sendNotification() {}
+  sendNotification() {
+    console.log(
+      '🚀 ~ file: app.component.ts:42 ~ this.tokenCompleted:',
+      this.tokenCompleted
+    );
+    this.saveToken(this.tokenCompleted).subscribe({
+      complete: () => console.log('Notification sent!'),
+    });
+  }
 
   saveToken(token: any) {
     return this.http.post(`http://localhost:9000/api/enviar`, {
