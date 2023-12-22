@@ -49,7 +49,7 @@ export class AppComponent {
 
   saveToken(token: any) {
     return this.http.post(`http://localhost:9000/api/enviar`, {
-      body: { token },
+      token,
     });
   }
 }
