@@ -28,6 +28,8 @@ export class AppComponent {
       })
       .then((sub) => {
         console.log('🚀 ~ file: app.component.ts:30 ~ sub:', sub);
+        const token = JSON.parse(JSON.stringify(sub));
+        console.log('Subscription successful', token);
         this.tokenCompleted = JSON.stringify(sub);
       })
       .catch((err) =>
