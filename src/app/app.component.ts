@@ -28,19 +28,20 @@ export class AppComponent {
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
       .then((sub) => {
-        console.log('Subscription successful', JSON.parse(JSON.stringify(sub)));
-        this.tokenCompleted = JSON.stringify(sub);
+        const token = JSON.parse(JSON.stringify(sub));
+        console.log('Subscription successful', token);
+        // this.tokenCompleted = JSON.stringify(sub);
+
+        this.saveToken(token).subscribe({
+          complete: () => console.log('Notification sent!'),
+        });
       })
       .catch((err) =>
         console.error('Could not subscribe to notifications', err)
       );
   }
 
-  sendNotification() {
-    this.saveToken(this.tokenCompleted).subscribe({
-      complete: () => console.log('Notification sent!'),
-    });
-  }
+  sendNotification() {}
 
   saveToken(token: any) {
     return this.http.post(`http://localhost:9000/api/enviar`, {

@@ -11,7 +11,8 @@ export class ApiRestService {
 
   saveToken(token: any) {
     return this.http.post(`${this.url}`, {
-      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Origin': '*',
       body: { token },
     });
   }
