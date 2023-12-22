@@ -27,6 +27,7 @@ export class AppComponent {
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
       .then((sub) => {
+        console.log('🚀 ~ file: app.component.ts:30 ~ sub:', sub);
         this.tokenCompleted = JSON.stringify(sub);
       })
       .catch((err) =>
