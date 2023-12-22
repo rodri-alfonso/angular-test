@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
-import { ApiRestService } from './api-rest.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +17,7 @@ export class AppComponent {
     'BCHF3qSYrnH-981aad1iH10JHRqAkH47QHDsXXpbigV5zQjh5gHddh74jlg9tNwIiWTCfl50W6l_0sYmLnjykvA';
   public tokenCompleted: any;
 
-  constructor(private swPush: SwPush, private apiRest: ApiRestService) {
+  constructor(private swPush: SwPush) {
     this.subscribeToNotifications();
   }
 
