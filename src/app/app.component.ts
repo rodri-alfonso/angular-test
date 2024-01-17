@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +12,31 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-test';
+  isAlertOpen = false;
 
   readonly VAPID_PUBLIC_KEY =
     'BCHF3qSYrnH-981aad1iH10JHRqAkH47QHDsXXpbigV5zQjh5gHddh74jlg9tNwIiWTCfl50W6l_0sYmLnjykvA';
   public tokenCompleted: any;
 
-  constructor(private swPush: SwPush, private http: HttpClient) {
-    this.subscribeToNotifications();
+  constructor(
+    private swPush: SwPush,
+    private http: HttpClient,
+    private swUpdate: SwUpdate
+  ) {
+    // this.subscribeToNotifications();
+  }
+
+  ngOnInit(): void {
+    this.swUpdate.checkForUpdate().then((response) => {
+      console.log('response', response);
+      this.isAlertOpen = true;
+    });
+  }
+
+  handleReload() {
+    this.swUpdate.activateUpdate().then(() => document.location.reload());
   }
 
   subscribeToNotifications() {

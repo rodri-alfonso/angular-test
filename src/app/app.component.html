@@ -217,33 +217,14 @@
         </defs>
       </svg>
       <h1>Hello, {{ title }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+      <p>Congratulations! Your app is running. in V1 🎉</p>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-      <button (click)="sendNotification()">
-        Set notifications in three seconds
-      </button>
-      <button
-        style="
-          padding: 10px;
-          background: whitesmoke;
-          border-radius: 10px;
-          margin: 40px;
-          border: none;
-          cursor: pointer;
-        "
-        (click)="handleUpdate()"
-      >
-        Update
-      </button>
-    </div>
   </div>
-  <div
-    style="width: 300px; height: 300px; border-radius: 30px; background: orange"
-  >
-    Lalalala
-  </div>
+
+  @if(isAlertOpen){
+  <button (click)="handleReload()">Check for updates</button>
+  }
 </main>
 
 <router-outlet></router-outlet>
