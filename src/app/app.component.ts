@@ -50,6 +50,10 @@ export class AppComponent {
       });
   }
 
+  handleUpdate() {
+    window.location.reload();
+  }
+
   saveToken(token: any) {
     return this.http.post(`http://localhost:9000/api/guardar`, {
       token,
