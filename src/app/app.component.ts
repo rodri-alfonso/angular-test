@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.swUpdate.checkForUpdate().then((response) => {
-      console.log('response', response);
-      this.isAlertOpen = true;
+      console.log('checkForUpdate ->', response);
+      this.isAlertOpen = response;
     });
   }
 
