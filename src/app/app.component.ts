@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     private appRef: ApplicationRef
   ) {
     // this.subscribeToNotifications();
-    this.onCheckUpdate();
+    // this.onCheckUpdate();
   }
 
   // updateClient() {
