@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
   onCheckUpdate() {
     this.appRef.isStable.subscribe((isStable) => {
       if (isStable) {
-        const timeInterval = interval(10000);
+        const timeInterval = interval(20000);
         // const timeInterval = interval(8 * 60 * 60 * 1000);
 
         timeInterval.subscribe(() => {
