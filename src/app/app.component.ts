@@ -48,7 +48,14 @@ export class AppComponent implements OnInit {
     if (this.swUpdate.isEnabled) {
       console.log('No disponible');
     }
+    // const timeInterval = interval(10000);
+    // // const timeInterval = interval(8 * 60 * 60 * 1000);
 
+    // timeInterval.subscribe(() => {
+    //   this.swUpdate.checkForUpdate().then((response) => {
+    //     console.log('checkForUpdate ->', response);
+    //   });
+    // });
     this.swUpdate.checkForUpdate().then((response) => {
       console.log('checkForUpdate ->', response);
       this.isAlertOpen = response;
