@@ -56,9 +56,11 @@ export class AppComponent implements OnInit {
     //     console.log('checkForUpdate ->', response);
     //   });
     // });
-    this.swUpdate.checkForUpdate().then((response) => {
-      console.log('checkForUpdate ->', response);
-      this.isAlertOpen = response;
+    this.swUpdate.versionUpdates.subscribe((event) => {
+      this.swUpdate.checkForUpdate().then((response) => {
+        console.log('checkForUpdate ->', response);
+        this.isAlertOpen = response;
+      });
     });
   }
 
@@ -67,7 +69,11 @@ export class AppComponent implements OnInit {
       if (isStable) {
         const timeInterval = interval(20000);
         // const timeInterval = interval(8 * 60 * 60 * 1000);
-
+        this.swUpdate.versionUpdates.subscribe((event) => {
+          if (confirm('update available for the app please conform')) {
+            this.swUpdate.activateUpdate().then(() => location.reload());
+          }
+        });
         timeInterval.subscribe(() => {
           this.swUpdate.checkForUpdate().then((response) => {
             console.log('checkForUpdate ->', response);
