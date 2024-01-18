@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,19 +24,57 @@ export class AppComponent implements OnInit {
   constructor(
     private swPush: SwPush,
     private http: HttpClient,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    private appRef: ApplicationRef
   ) {
     // this.subscribeToNotifications();
+    this.onCheckUpdate();
   }
 
+  // updateClient() {
+  //   if (!this.swUpdate.isEnabled) {
+  //     console.log('Not Enabled');
+  //     return;
+  //   }
+  //   this.swUpdate.available.subscribe((event) => {
+  //     console.log(`current`, event.current, `available `, event.available);
+  //     if (confirm('update available for the app please conform')) {
+  //       this.swUpdate.activateUpdate().then(() => location.reload());
+  //     }
+  //   });
+  // }
+
   ngOnInit(): void {
+    if (this.swUpdate.isEnabled) {
+      console.log('No disponible');
+    }
+
     this.swUpdate.checkForUpdate().then((response) => {
       console.log('checkForUpdate ->', response);
       this.isAlertOpen = response;
     });
   }
 
+  onCheckUpdate() {
+    this.appRef.isStable.subscribe((isStable) => {
+      if (isStable) {
+        const timeInterval = interval(10000);
+        // const timeInterval = interval(8 * 60 * 60 * 1000);
+
+        timeInterval.subscribe(() => {
+          this.swUpdate.checkForUpdate().then((response) => {
+            console.log('checkForUpdate ->', response);
+          });
+        });
+      }
+    });
+  }
+
   handleReload() {
+    if (!this.swUpdate.isEnabled) {
+      console.log('No disponible');
+      return;
+    }
     this.swUpdate.activateUpdate().then(() => document.location.reload());
   }
 
